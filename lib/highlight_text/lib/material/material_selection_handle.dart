@@ -46,10 +46,10 @@ class MaterialSelectionHandle extends TextSelectionHandle {
   Widget buildHandle(
       BuildContext context, TextSelectionHandleType type, double textHeight) {
     final ThemeData theme = Theme.of(context);
-    final Color handleColor = theme.useTextSelectionTheme
+    final Color handleColor = theme.textSelectionTheme == null
         ? TextSelectionTheme.of(context).selectionHandleColor ??
             theme.colorScheme.primary
-        : theme.textSelectionHandleColor;
+        : theme.textSelectionTheme.selectionHandleColor;
     final Widget handle = SizedBox(
       width: _kHandleSize,
       height: _kHandleSize,

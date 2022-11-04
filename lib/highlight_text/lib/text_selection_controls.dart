@@ -175,22 +175,26 @@ class TextSelectionToolbarItem {
         height: kMinInteractiveDimension,
         minWidth: kMinInteractiveDimension,
       ),
-      child: FlatButton(
-        onPressed: onPressed != null
-            ? () {
-                final controller = TextSelectionToolbarController.of(context);
-                controller.hide();
-                onPressed(controller);
-              }
-            : null,
+      child: Container(
         padding: EdgeInsets.only(
           // These values were eyeballed to match the native text selection menu
           // on a Pixel 2 running Android 10.
           left: 9.5 + (isFirst ? 5.0 : 0.0),
           right: 9.5 + (isLast ? 5.0 : 0.0),
         ),
-        shape: Border.all(width: 0.0, color: Colors.transparent),
-        child: label,
+        decoration: BoxDecoration(
+            // shape: Border.all(width: 0.0, color: Colors.transparent),
+            ),
+        child: ElevatedButton(
+          onPressed: onPressed != null
+              ? () {
+                  final controller = TextSelectionToolbarController.of(context);
+                  controller.hide();
+                  onPressed(controller);
+                }
+              : null,
+          child: label,
+        ),
       ),
     );
   };
@@ -243,8 +247,9 @@ class DefaultTextSelectionControls extends TextSelectionControls {
   /// Builder for material-style text selection handles.
   @override
   Widget buildHandle(
-      BuildContext context, TextSelectionHandleType type, double textHeight) {
-    return handle.buildHandle(context, type, textHeight);
+      BuildContext context, TextSelectionHandleType type, double textLineHeight,
+      [VoidCallback onTap]) {
+    return handle.buildHandle(context, type, textLineHeight);
   }
 
   /// Gets anchor for material-style text selection handles.
@@ -274,7 +279,8 @@ class DefaultTextSelectionControls extends TextSelectionControls {
       Offset position,
       List<TextSelectionPoint> endpoints,
       TextSelectionDelegate delegate,
-      ClipboardStatusNotifier clipboardStatus) {
+      ClipboardStatusNotifier clipboardStatus,
+      Offset lastSecondaryTapDownPosition) {
     return TextSelectionToolbarController(
       clipboardStatus: clipboardStatus,
       delegate: delegate,

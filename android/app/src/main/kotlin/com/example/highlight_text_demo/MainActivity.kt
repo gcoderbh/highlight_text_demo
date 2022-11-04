@@ -1,4 +1,4 @@
-package com.example.text_span_thousands
+package com.example.highlight_text_demo
 
 import io.flutter.embedding.android.FlutterActivity
 

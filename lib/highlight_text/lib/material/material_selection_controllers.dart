@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
 
 import '../selection_toolbar_controller.dart';
-import '../text_selection_controls.dart';
+import '../text_selection_controls.dart' as TSC;
 
 const double _kHandleSize = 22.0;
 
@@ -30,7 +30,7 @@ class _TextSelectionToolbar extends StatefulWidget {
     this.theme,
   }) : super(key: key);
 
-  final List<TextSelectionToolbarItem> items;
+  final List<TSC.TextSelectionToolbarItem> items;
 
   // When true, the toolbar fits above its anchor and will be positioned there.
   final bool isAbove;
@@ -79,11 +79,11 @@ class _TextSelectionToolbarState extends State<_TextSelectionToolbar>
   }
 
   Widget _getItem(
-      TextSelectionToolbarItem itemData, bool isFirst, bool isLast) {
+      TSC.TextSelectionToolbarItem itemData, bool isFirst, bool isLast) {
     assert(isFirst != null);
     assert(isLast != null);
     return itemData.buildItem(
-        context, isFirst, isLast, TextSelectionToolbarItem.materialBuilder);
+        context, isFirst, isLast, TSC.TextSelectionToolbarItem.materialBuilder);
   }
 
   @override
@@ -629,9 +629,9 @@ class _TextSelectionToolbarLayout extends SingleChildLayoutDelegate {
   }
 }
 
-class MaterialSelectionToolbar extends TextSelectionToolbar {
+class MaterialSelectionToolbar extends TSC.TextSelectionToolbar {
   @override
-  final List<TextSelectionToolbarItem> items;
+  final List<TSC.TextSelectionToolbarItem> items;
 
   final Color backgroundColor;
   final double elevation;
